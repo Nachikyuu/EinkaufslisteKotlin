@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var todoAdapter: TodoAdapter
 
+// Aufruf bei App-Start
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -21,12 +22,14 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
+// Zuweisung einer mutable List, mit der Einträge hinzugefügt werden können
         todoAdapter.adapter = todoAdapter(mutableListOf())
 
+// Listenreihenfolge wird festgelegt
         rvTodoItems.adapter = todoAdapter
         rvTodoItems.layoutManager = LinearLayoutManager(this)
 
+// Verhalten bei Klick auf die Buttons
         btnAddTodo.setOnClickListener {
             val todoTitle = etTodoTitle.text.toString()
             if(todoTitle.isNotEmpty()){
@@ -41,4 +44,3 @@ class MainActivity : AppCompatActivity() {
 
     }
 }
-//val list: MutableList<String> = mutableListOf() aus Stack Overflow mutable list

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
 import android.widget.TextView
 
-?
+// Adapter für die Recycler View, die die einzelnen Elemente der Liste darstellt
 
 class TodoAdapter (
     private val todos: MutableList<Todo>
@@ -15,6 +15,7 @@ class TodoAdapter (
 
     class TodoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
+    // Erstellen des ViewHolders für jedes Element in der Liste, Layout aus selbsterstellter xml-Datei in res/layout
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -28,13 +29,13 @@ class TodoAdapter (
             )
         )
     }
-
+// Hinzufügen eines neuen Todos zur Liste
     fun addTodo(todo: Todo) {
         todos.add(todo)
         notifyItemInserted( todos.size - 1)
 
     }
-
+// Löschen aller erledigten Todos aus der Liste
     fun deleteDoneTodos() {
         todos.removeAll { todo ->
             todo.isChecked
@@ -42,7 +43,7 @@ class TodoAdapter (
         notifyDataSetChanged()
 
     }
-
+// streicht den Text aus, wenn ein Todo erledigt ist
     private fun toggleStrikeThrough(tvTodoTitle: TextView, isChecked: Boolean) {
         if(isChecked) {
             tvTodoTitle.pointFlags = tvTodoTitle.pointFlags or STRIKE_THRU_TEXT_FLAG
@@ -50,7 +51,7 @@ class TodoAdapter (
             tvTodoTitle.pointFlags = tvTodoTitle.pointFlags and STRIKE_THRU_TEXT_FLAG.inv()
         }
     }
-
+// Bindung der Daten mit den Elementen
     override fun onBindViewHolder(holder: TodoAdapter.TodoViewHolder, position: Int) {
         val curTodo = todos[position]
         holder.itemView.apply {
@@ -64,6 +65,7 @@ class TodoAdapter (
         }
     }
 
+// Anzahl der Einträge, damit der Recycler View weiß, wieviele Elemente er darstellen soll
     override fun getItemCount(): Int {
         return todos.size
     }
